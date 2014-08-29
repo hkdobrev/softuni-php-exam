@@ -61,9 +61,12 @@ foreach ($products as $category => &$categoryProducts) {
 	}
 
 	uasort($temp, function($a, $b) {
-		return ($a[2]['product'] === $b[2]['product'])
+		$equality = strcmp($a[2]['product'], $b[2]['product']);
+
+		// If values are equal compare based on original positions
+		return $equality === 0
 			? ($a[0] > $b[0])
-			: strcmp($a[2]['product'], $b[2]['product']);
+			: $equality;
 	});
 
 	$categoryProducts = array();
@@ -73,4 +76,4 @@ foreach ($products as $category => &$categoryProducts) {
 	$categoryProducts = array_values($categoryProducts);
 }
 
-echo json_encode($products);
+return json_encode($products);
