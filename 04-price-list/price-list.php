@@ -51,10 +51,26 @@ foreach ($rows as $row) {
 
 ksort($products);
 
+// stable sorting so products with the same name preserve their order
 foreach ($products as $category => &$categoryProducts) {
-	usort($categoryProducts, function($a, $b) {
-		return strcmp($a['product'], $b['product']);
+	$temp = array();
+	$i = 0;
+	foreach ($categoryProducts as $key => $value) {
+		$temp[] = array($i, $key, $value);
+		$i++;
+	}
+
+	uasort($temp, function($a, $b) {
+		return ($a[2]['product'] === $b[2]['product'])
+			? ($a[0] > $b[0])
+			: strcmp($a[2]['product'], $b[2]['product']);
 	});
+
+	$categoryProducts = array();
+	foreach ($temp as $val) {
+		$categoryProducts[$val[1]] = $val[2];
+	}
+	$categoryProducts = array_values($categoryProducts);
 }
 
 echo json_encode($products);
