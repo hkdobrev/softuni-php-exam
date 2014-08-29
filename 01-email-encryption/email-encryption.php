@@ -1,9 +1,9 @@
 <?php
 
 // Escape HTML data
-$recipient = htmlspecialchars($_GET['recipient'], ENT_HTML5 | ENT_QUOTES, "UTF-8");
-$subject   = htmlspecialchars($_GET['subject'], ENT_HTML5 | ENT_QUOTES, "UTF-8");
-$body      = htmlspecialchars($_GET['body'], ENT_HTML5 | ENT_QUOTES, "UTF-8");
+$recipient = htmlspecialchars($_GET['recipient']);
+$subject   = htmlspecialchars($_GET['subject']);
+$body      = htmlspecialchars($_GET['body']);
 $key       = $_GET['key'];
 
 $email = <<<EMAIL
