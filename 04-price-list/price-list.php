@@ -37,7 +37,7 @@ foreach ($rows as $row) {
 	$index = 0;
 	foreach ($cells as $cell) {
 		if (isset($cell->nodeName) and $cell->nodeName === 'td') {
-			$product[$indexes[$index]] = html_entity_decode(trim($cell->nodeValue), ENT_COMPAT | ENT_HTML401, 'UTF-8');
+			$product[$indexes[$index]] = trim($cell->nodeValue);
 			$index++;
 		}
 	}
